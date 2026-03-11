@@ -71,12 +71,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="SingUpPage.xaml.cs">
+	    <DependentUpon>SingUpPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="SignInPage.xaml.cs">
 	    <DependentUpon>SignInPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="SingUpPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SignInPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
