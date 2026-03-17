@@ -1,53 +1,48 @@
-﻿using System;
+﻿namespace ToDoApp;
+
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-namespace ToDoApp
+
+public class ToDoClass : INotifyPropertyChanged
 {
-    public class ToDoClass : INotifyPropertyChanged
+    int _id;
+    string _title;
+    string _detail;
+
+    public int id
     {
-        public ToDoClass()
-        {
-        }
-        int _item_id { get; set; }
-        string _item_name { get; set; }
-        string _item_description { get; set; }
-        string _status { get; set; }
-        int _user_id { get; set; }
-        public int item_id
-        {
-            get { return _item_id; }
-            set { _item_id = value; OnPropertyChanged(nameof(item_id)); }
-        }
-        public string item_name
-        {
-            get { return _item_name; }
-            set { _item_name = value; OnPropertyChanged(nameof(item_name)); }
-        }
-        public string item_description
-        {
-            get { return _item_description; }
-            set
-            {
-                _item_description = value;
-                OnPropertyChanged(nameof(item_description));
-            }
-        }
-        public string status
-        {
-            get { return _status; }
-            set { _status = value; OnPropertyChanged(nameof(status)); }
-        }
-        public int user_id
-        {
-            get { return _user_id; }
-            set { _user_id = value; OnPropertyChanged(nameof(user_id)); }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string
-propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new
-            PropertyChangedEventArgs(propertyName));
-        }
+        get => _id;
+        set => SetField(ref _id, value);
+    }
+
+    public string title
+    {
+        get => _title;
+        set => SetField(ref _title, value);
+    }
+
+    public string detail
+    {
+        get => _detail;
+        set => SetField(ref _detail, value);
+    }
+
+
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+
+    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+        field = value;
+        OnPropertyChanged(propertyName);
+        return true;
     }
 }
