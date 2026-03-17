@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoApp.UserProfile">
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto,*">
+            <Label Grid.Row="0" Text="User Profile" FontSize="18" FontAttributes="Bold" TextColor="#D3D3D3" HorizontalOptions="Center" Margin="0,15,0,15" />
+            <BoxView Grid.Row="0" HeightRequest="1" Color="#F0F0F0" VerticalOptions="End"/>
+            <Button Grid.Row="1" Text="Signout" FontSize="18" TextColor="White" BackgroundColor="#A3A3D1" CornerRadius="12"  HorizontalOptions="Center" VerticalOptions="Start" HeightRequest="1" Margin="0,0,0,20" Clicked="SignOut">
+                <Button.Shadow><Shadow Brush="Black" Offset="0,3" Radius="5" Opacity="0.2"/></Button.Shadow>
+            </Button>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

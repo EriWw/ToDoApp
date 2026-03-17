@@ -24,6 +24,17 @@ public partial class MainPage : ContentPage
             TaskStore.ActiveTasks.Add(newItem);
         }
     }
+
+    private void OnDeleteTapped(object sender, EventArgs e)
+    {
+        var tappedLabel = sender as Label;
+        var itemToRemove = tappedLabel?.BindingContext as ToDoClass;
+
+        if (itemToRemove != null)
+        {
+            TaskStore.ActiveTasks.Remove(itemToRemove);
+        }
+    }
     private async void OnEditTapped(object sender, EventArgs e)
     {
         // 1. Find out which item was tapped
@@ -55,17 +66,6 @@ public partial class MainPage : ContentPage
             // Because your ToDoClass uses INotifyPropertyChanged, the screen will update instantly!
             itemToEdit.title = updatedTitle;
             itemToEdit.detail = updatedDetails;
-        }
-    }
-
-    private void OnDeleteTapped(object sender, EventArgs e)
-    {
-        var tappedLabel = sender as Label;
-        var itemToRemove = tappedLabel?.BindingContext as ToDoClass;
-
-        if (itemToRemove != null)
-        {
-            TaskStore.ActiveTasks.Remove(itemToRemove);
         }
     }
 
