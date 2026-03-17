@@ -27,9 +27,15 @@
             <Tab.Icon>
                 <FontImageSource FontFamily="OpenSansRegular" Glyph="👤" />
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
+            <ShellContent ContentTemplate="{DataTemplate local:UserProfile}" />
         </Tab>
 
     </TabBar>
+
+
+
+
+    <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate views:LoginPage}"/>
+
 
 </Shell>

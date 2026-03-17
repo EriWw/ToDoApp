@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ToDoApp.Views;
 
 namespace ToDoApp
 {
@@ -11,7 +12,7 @@ namespace ToDoApp
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new AppShell());
+            return new Window(new NavigationPage(new LoginPage()));
         }
     }
 }

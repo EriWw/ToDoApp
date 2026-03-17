@@ -19,8 +19,8 @@ public partial class LoginPage : ContentPage
             return;
         }
 
-        // Simulate successful login navigation (e.g., changing the MainPage)
-        // Application.Current.MainPage = new AppShell(); 
+      
+        Application.Current.MainPage = new AppShell(); 
     }
 
     private async void OnSignUpTapped(object sender, TappedEventArgs e)
