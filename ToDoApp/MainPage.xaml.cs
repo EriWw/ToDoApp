@@ -1,24 +1,51 @@
-﻿namespace ToDoApp
+﻿using ToDoApp.Views;
+
+namespace ToDoApp;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    int nextId = 1;
+
+    public MainPage()
     {
-        int count = 0;
+        InitializeComponent();
+        
 
-        public MainPage()
+        todoLV.ItemsSource = TaskStore.ActiveTasks;
+    }
+
+    private async void OnAddTapped(object sender, EventArgs e)
+    {
+        string newTitle = await DisplayPromptAsync("New Task", "Enter the task title:");
+        string newDescription = await DisplayPromptAsync("New Description", "Enter the task description:");
+        if (!string.IsNullOrWhiteSpace(newTitle))
         {
-            InitializeComponent();
+            var newItem = new ToDoClass { id = nextId++, title = newTitle, detail = newDescription };
+            TaskStore.ActiveTasks.Add(newItem);
         }
+    }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+    private void OnDeleteTapped(object sender, EventArgs e)
+    {
+        var tappedLabel = sender as Label;
+        var itemToRemove = tappedLabel?.BindingContext as ToDoClass;
+
+        if (itemToRemove != null)
         {
-            count++;
+            TaskStore.ActiveTasks.Remove(itemToRemove);
+        }
+    }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+    private void OnCheckTapped(object sender, EventArgs e)
+    {
+        var tappedLabel = sender as Label;
+        var itemToCheck = tappedLabel?.BindingContext as ToDoClass;
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        if (itemToCheck != null)
+        {
+            // Moves it from this page to the CompletedPage
+            TaskStore.ActiveTasks.Remove(itemToCheck);
+            TaskStore.CompletedTasks.Add(itemToCheck);
         }
     }
 }

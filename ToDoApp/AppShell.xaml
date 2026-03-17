@@ -4,11 +4,32 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ToDoApp"
-    Title="ToDoApp">
+    xmlns:views="clr-namespace:ToDoApp.Views"
+    Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:SignInPage}"
-        Route="MainPage" />
+    <TabBar>
+        
+        <Tab Title="ToDo">
+            <Tab.Icon>
+                <FontImageSource FontFamily="OpenSansRegular" Glyph="📋" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+        </Tab>
+
+        <Tab Title="Completed">
+            <Tab.Icon>
+                <FontImageSource FontFamily="OpenSansRegular" Glyph="✔️" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate local:CompletedPage}" />
+        </Tab>
+
+        <Tab Title="Profile">
+            <Tab.Icon>
+                <FontImageSource FontFamily="OpenSansRegular" Glyph="👤" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
+        </Tab>
+
+    </TabBar>
 
 </Shell>

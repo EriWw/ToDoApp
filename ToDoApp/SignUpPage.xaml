@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoApp.Views.SignUpPage"
+             Title="Create Account">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" 
+                             Padding="30" 
+                             VerticalOptions="Center">
+
+            <Label Text="Create an Account" 
+                   FontSize="32" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,20" />
+
+            <Entry x:Name="NameEntry" 
+                   Placeholder="Full Name" 
+                   ClearButtonVisibility="WhileEditing" />
+
+            <Entry x:Name="EmailEntry" 
+                   Placeholder="Email address" 
+                   Keyboard="Email"
+                   ClearButtonVisibility="WhileEditing" />
+
+            <Entry x:Name="PasswordEntry" 
+                   Placeholder="Password" 
+                   IsPassword="True"
+                   ClearButtonVisibility="WhileEditing" />
+
+            <Entry x:Name="ConfirmPasswordEntry" 
+                   Placeholder="Confirm Password" 
+                   IsPassword="True"
+                   ClearButtonVisibility="WhileEditing" />
+
+            <Button Text="Sign Up" 
+                    Clicked="OnSignUpClicked" 
+                    Margin="0,20,0,0"
+                    HeightRequest="50" />
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Margin="0,20,0,0">
+                <Label Text="Already have an account?" 
+                       VerticalOptions="Center" />
+                <Label Text="Login" 
+                       TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" 
+                       FontAttributes="Bold" 
+                       TextDecorations="Underline"
+                       VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLoginTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
