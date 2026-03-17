@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoApp.Views.LoginPage"
+             Title="Login">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" 
+                             Padding="30" 
+                             VerticalOptions="Center">
+            
+            <Label Text="Welcome Back!" 
+                   FontSize="32" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,20" />
+
+            <Entry x:Name="EmailEntry" 
+                   Placeholder="Email address" 
+                   Keyboard="Email"
+                   ClearButtonVisibility="WhileEditing" />
+
+            <Entry x:Name="PasswordEntry" 
+                   Placeholder="Password" 
+                   IsPassword="True"
+                   ClearButtonVisibility="WhileEditing" />
+
+            <Button Text="Login" 
+                    Clicked="OnLoginClicked" 
+                    Margin="0,20,0,0"
+                    HeightRequest="50" />
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Margin="0,20,0,0">
+                <Label Text="Don't have an account?" 
+                       VerticalOptions="Center" />
+                <Label Text="Sign Up" 
+                       TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" 
+                       FontAttributes="Bold" 
+                       TextDecorations="Underline"
+                       VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSignUpTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
