@@ -26,16 +26,36 @@
                             <Border.StrokeShape><RoundRectangle CornerRadius="6" /></Border.StrokeShape>
                             <Border.Shadow><Shadow Brush="Black" Offset="0,2" Radius="4" Opacity="0.1" /></Border.Shadow>
 
-                            <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="15">
-                                <Label Text="{Binding title}" VerticalOptions="Center" TextColor="#333333" FontSize="16"/>
+                            <Grid ColumnDefinitions="*, Auto, Auto, Auto" ColumnSpacing="15">
                                 
-                                <Label Grid.Column="1" Text="🗑️" VerticalOptions="Center" FontSize="18">
+                                <Label Text="{Binding title}" 
+                                       VerticalOptions="Center" 
+                                       TextColor="#333333" 
+                                       FontSize="16"/>
+                                
+                                <Label Grid.Column="1" 
+                                       Text="✏️" 
+                                       VerticalOptions="Center" 
+                                       FontSize="18">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnEditTapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label Grid.Column="2" 
+                                       Text="🗑️" 
+                                       VerticalOptions="Center" 
+                                       FontSize="18">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnDeleteTapped" />
                                     </Label.GestureRecognizers>
                                 </Label>
 
-                                <Label Grid.Column="2" Text="✔️" VerticalOptions="Center" FontSize="18" TextColor="Black">
+                                <Label Grid.Column="3" 
+                                       Text="✔️" 
+                                       VerticalOptions="Center" 
+                                       FontSize="18"
+                                       TextColor="Black">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnCheckTapped" />
                                     </Label.GestureRecognizers>
