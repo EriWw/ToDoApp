@@ -16,6 +16,7 @@ public partial class SignUpPage : ContentPage
     {
         // 1. Get the text from the UI
         string fullName = NameEntry.Text?.Trim();
+        string lastName = LastNameEntry.Text?.Trim();
         string email = EmailEntry.Text?.Trim();
         string password = PasswordEntry.Text;
         string confirmPassword = ConfirmPasswordEntry.Text;
@@ -38,20 +39,15 @@ public partial class SignUpPage : ContentPage
         // 3. The API needs First and Last name separately. 
         // We will split the Full Name at the first space.
         string fname = fullName;
-        string lname = ""; // Default empty
+        string lname = lastName;
         
-        int spaceIndex = fullName.IndexOf(' ');
-        if (spaceIndex > 0)
-        {
-            fname = fullName.Substring(0, spaceIndex);
-            lname = fullName.Substring(spaceIndex + 1);
-        }
 
-        // 4. Send the data to the API
-        bool success = await _apiService.SignUpAsync(fname, lname, email, password);
+        // 4. Send the data to the API 
+        // (Using the updated service method that returns the success status AND the server message)
+        var response = await _apiService.SignUpAsync(fname, lname, email, password);
 
         // 5. Handle the response
-        if (success)
+        if (response.IsSuccess)
         {
             await DisplayAlert("Success", "Account created successfully! You can now log in.", "OK");
             
@@ -60,7 +56,8 @@ public partial class SignUpPage : ContentPage
         }
         else
         {
-            await DisplayAlert("Error", "Failed to create account. That email might already be taken.", "OK");
+            // Display the EXACT error text returned by the server
+            await DisplayAlert("Server Error", $"The server said: {response.Message}", "OK");
         }
     }
 
