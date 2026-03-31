@@ -6,7 +6,9 @@
              BackgroundColor="White">
 
     
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Log Out" Clicked="OnLogOutClicked" />
+    </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto, *">
         
         <Label Grid.Row="0" Text="ToDo" FontSize="18" FontAttributes="Bold" TextColor="#D3D3D3" HorizontalOptions="Center" Margin="0,15,0,15" />
