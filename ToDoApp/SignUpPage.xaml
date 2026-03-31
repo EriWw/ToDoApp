@@ -16,7 +16,10 @@
                    Margin="0,0,0,20" />
 
             <Entry x:Name="NameEntry" 
-                   Placeholder="Full Name" 
+                   Placeholder="First Name" 
+                   ClearButtonVisibility="WhileEditing" />
+            <Entry x:Name="LastNameEntry" 
+                   Placeholder="Last Name" 
                    ClearButtonVisibility="WhileEditing" />
 
             <Entry x:Name="EmailEntry" 

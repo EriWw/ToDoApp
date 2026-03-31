@@ -147,14 +147,21 @@ public partial class MainPage : ContentPage
     }
     private void OnLogOutClicked(object sender, EventArgs e)
     {
-        // 1. Remove the saved User ID from the device's memory
+        // 1. Remove the saved User ID
         Preferences.Default.Remove("CurrentUserId");
 
-        // Optional: Clear the active tasks so the next person logging in doesn't briefly see them
+        // 2. UNBIND the UI before clearing the data. 
+        // This stops the app from trying to redraw a page that is closing!
+        todoLV.ItemsSource = null; 
+
+        // 3. Now it is safe to clear the memory
         TaskStore.ActiveTasks.Clear(); 
         TaskStore.CompletedTasks.Clear();
 
-        // 2. Change the screen back to the Sign In page
-        Application.Current.MainPage = new NavigationPage(new SignInPage());
+        // 4. Safely switch the page on the Main UI Thread
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            Application.Current.MainPage = new NavigationPage(new SignInPage());
+        });
     }
 }

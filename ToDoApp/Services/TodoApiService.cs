@@ -51,13 +51,39 @@ namespace ToDoApp.Services
         // AUTHENTICATION
         // ==========================================
 
-        public async Task<bool> SignUpAsync(string fname, string lname, string email, string password)
+        public async Task<(bool IsSuccess, string Message)> SignUpAsync(string fname, string lname, string email, string password)
         {
-            var payload = new { first_name = fname, last_name = lname, email, password, confirm_password = password };
-            var response = await _httpClient.PostAsJsonAsync("/signup_action.php", payload);
-            
-            var result = await response.Content.ReadFromJsonAsync<ApiResponse<object>>();
-            return result?.Status == 200;
+            // Ensure the keys exactly match the API documentation
+            var payload = new 
+            { 
+                first_name = fname, 
+                last_name = lname, 
+                email = email, 
+                password = password, 
+                confirm_password = password 
+            };
+
+            try 
+            {
+                var response = await _httpClient.PostAsJsonAsync("/signup_action.php", payload);
+        
+                // Read the raw text from the server, no matter what happens
+                string rawContent = await response.Content.ReadAsStringAsync();
+        
+                var result = JsonSerializer.Deserialize<ApiResponse<object>>(rawContent);
+        
+                if (result != null && result.Status == 200)
+                {
+                    return (true, result.Message);
+                }
+        
+                // If it fails, grab the EXACT message the API sent back
+                return (false, result?.Message ?? rawContent); 
+            }
+            catch (Exception ex)
+            {
+                return (false, ex.Message);
+            }
         }
 
         public async Task<User> SignInAsync(string email, string password)

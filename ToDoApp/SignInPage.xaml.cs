@@ -34,11 +34,14 @@ public partial class SignInPage : ContentPage
         // 4. Handle the result
         if (loggedInUser != null)
         {
-            // SUCCESS! Save the User ID directly to the device so MainPage can use it
+            // SUCCESS! Save the User ID
             Preferences.Default.Set("CurrentUserId", loggedInUser.Id);
 
-            // Change the main window of the app to your MainPage
-            Application.Current.MainPage = new NavigationPage(new MainPage());
+            // Safely change the window to MainPage on the Main UI Thread
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                Application.Current.MainPage = new NavigationPage(new MainPage());
+            });
         }
         else
         {
