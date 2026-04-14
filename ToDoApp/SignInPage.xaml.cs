@@ -40,7 +40,7 @@ public partial class SignInPage : ContentPage
             // Safely change the window to MainPage on the Main UI Thread
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                Application.Current.MainPage = new NavigationPage(new MainPage());
+                Application.Current.MainPage = new AppShell();
             });
         }
         else
